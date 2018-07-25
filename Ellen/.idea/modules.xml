@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Ellen.iml" filepath="$PROJECT_DIR$/Ellen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EllenClient/EllenClient.iml" filepath="$PROJECT_DIR$/EllenClient/EllenClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EllenCommon/EllenCommon.iml" filepath="$PROJECT_DIR$/EllenCommon/EllenCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EllenCore/EllenCore.iml" filepath="$PROJECT_DIR$/EllenCore/EllenCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EllenExample/EllenExample.iml" filepath="$PROJECT_DIR$/EllenExample/EllenExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EllenServer/EllenServer.iml" filepath="$PROJECT_DIR$/EllenServer/EllenServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ellen-admin/ellen-admin.iml" filepath="$PROJECT_DIR$/ellen-admin/ellen-admin.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ellen-server" />
+        <module name="EllenClient" />
+        <module name="EllenCommon" />
+        <module name="EllenCore" />
+        <module name="EllenExample" />
+        <module name="EllenServer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="Ellen" target="1.5" />
+      <module name="ellen-admin" target="1.8" />
+      <module name="EllenClient" target="1.5" />
+      <module name="EllenCommon" target="1.5" />
+      <module name="EllenCore" target="1.5" />
+      <module name="EllenExample" target="1.5" />
+      <module name="EllenServer" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
