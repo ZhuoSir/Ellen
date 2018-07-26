@@ -1,7 +1,7 @@
 package com.chen.ellen.service.handlers;
 
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.service.ServerRespService;
+import com.chen.ellen.im.core.service.ImServerResponse;
 import com.chen.ellen.im.core.session.Session;
 import com.chen.ellen.proto.IMHeader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CmdHandlerManager {
 
     @Autowired
-    private ServerRespService serverRespService;
+    private ImServerResponse imServerResponse;
 
     @Autowired
     private TypeHandlerManager typeHandlerManager;
@@ -50,7 +50,7 @@ public class CmdHandlerManager {
 
         @Override
         public void handle(Session session, IMessageWrapper wrapper) {
-            serverRespService.pushMessage(session, wrapper);
+            imServerResponse.pushMessage(session, wrapper);
         }
     }
 

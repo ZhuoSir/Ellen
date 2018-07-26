@@ -1,0 +1,56 @@
+2018-07-26 16:59:47 [ main ] Ellen IM Server 启动中：线程数：6 端口号：8888 是否同步：false
+2018-07-26 16:59:47 [ nioEventLoopGroup-2-1 ] Ellen IM Server 启动成功
+2018-07-26 17:08:56 [ main ] Ellen IM Server 启动中：线程数：6 端口号：8888 是否同步：false
+2018-07-26 17:08:56 [ nioEventLoopGroup-2-1 ] Ellen IM Server 启动成功
+2018-07-26 17:09:33 [ main ] Unknown channel option 'SO_BACKLOG' for channel '[id: 0x9cd6cf3a]'
+2018-07-26 17:09:33 [ nioEventLoopGroup-3-1 ] 有新的连接，创建会话Session
+2018-07-26 17:09:33 [ nioEventLoopGroup-3-1 ] 创建新的会话成功SessionSession(mChannel=[id: 0x1b5ce7c6, L:/127.0.0.1:8888 - R:/127.0.0.1:52066], sessionId=fa924762c794438baf24c60e783dac80, accountId=null, host=null, bindTime=null, updateTime=null, status=17)
+2018-07-26 17:09:33 [ nioEventLoopGroup-2-1 ] 登陆成功
+2018-07-26 17:09:33 [ main ] Client has connected to server successfully...
+2018-07-26 17:09:33 [ nioEventLoopGroup-3-1 ] 服务端接收消息:C2SPacket(c2SHead=C2SHead(sender=null, receiver=null, deviceId=null, groupId=null, requestId=null), c2SBody=C2SBody(imAccount=ImAccount(accountId=bryan chen, nickName=Bryan, password=123456, createTime=Thu Jul 26 17:09:32 CST 2018)))
+2018-07-26 17:10:51 [ main ] Unknown channel option 'SO_BACKLOG' for channel '[id: 0x5089f9b9]'
+2018-07-26 17:10:51 [ nioEventLoopGroup-3-2 ] 有新的连接，创建会话Session
+2018-07-26 17:10:51 [ nioEventLoopGroup-3-2 ] 创建新的会话成功SessionSession(mChannel=[id: 0x81bcc12b, L:/127.0.0.1:8888 - R:/127.0.0.1:52135], sessionId=657b17c365ca40d6a0097766a5bd7fb0, accountId=null, host=null, bindTime=null, updateTime=null, status=17)
+2018-07-26 17:10:51 [ nioEventLoopGroup-3-2 ] 服务端接收消息:C2SPacket(c2SHead=C2SHead(sender=null, receiver=null, deviceId=null, groupId=null, requestId=null), c2SBody=C2SBody(imAccount=ImAccount(accountId=wang chen, nickName=Wang, password=123456, createTime=Thu Jul 26 17:10:50 CST 2018)))
+2018-07-26 17:10:51 [ main ] Client has connected to server successfully...
+2018-07-26 17:10:51 [ nioEventLoopGroup-2-1 ] 登陆成功
+2018-07-26 17:10:55 [ nioEventLoopGroup-3-2 ] 服务端接收消息:C2SPacket(c2SHead=C2SHead(sender=null, receiver=fa924762c794438baf24c60e783dac80, deviceId=null, groupId=null, requestId=null), c2SBody=C2SBody(imAccount=ImAccount(accountId=wang chen, nickName=Wang, password=123456, createTime=Thu Jul 26 17:10:50 CST 2018)))
+2018-07-26 17:10:55 [ nioEventLoopGroup-2-1 ] null: hello world
+2018-07-26 17:20:58 [ nioEventLoopGroup-3-1 ] An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1108)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:345)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:126)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:886)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+2018-07-26 17:20:59 [ nioEventLoopGroup-2-1 ] An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1108)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:345)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:126)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:886)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+2018-07-26 17:34:34 [ main ] welcome to use Ellen IM software ...
+2018-07-26 17:34:40 [ main ] hello

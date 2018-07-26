@@ -1,9 +1,9 @@
 package com.chen.ellen.server;
 
-import com.chen.ellen.im.core.proxy.MessageProxy;
+import com.chen.ellen.im.core.proxy.ImMessageProxy;
 import com.chen.ellen.im.core.server.ImServer;
 import com.chen.ellen.im.core.server.ImServerImpl;
-import com.chen.ellen.im.core.service.ServerRespService;
+import com.chen.ellen.im.core.service.ImServerResponse;
 import com.chen.ellen.im.core.session.ImConnect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,18 +20,18 @@ public class Configuration {
     private ImConnect imConnect;
 
     @Autowired
-    private ServerRespService serverRespService;
+    private ImServerResponse imServerResponse;
 
     @Autowired
-    private MessageProxy messageProxy;
+    private ImMessageProxy imMessageProxy;
 
     @Bean("imServer")
     public ImServer imServer() {
         if (imServer == null) {
             imServer = new ImServerImpl();
             imServer.setImConnect(imConnect);
-            imServer.setMessageProxy(messageProxy);
-            imServer.setServerRespService(serverRespService);
+            imServer.setImMessageProxy(imMessageProxy);
+            imServer.setImServerResponse(imServerResponse);
         }
 
         return imServer;

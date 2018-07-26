@@ -1,6 +1,6 @@
 package com.chen.ellen.im.core.message;
 
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.proto.C2SBody;
 import com.chen.ellen.proto.C2SHead;
 import com.chen.ellen.proto.C2SPacket;

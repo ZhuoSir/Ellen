@@ -1,6 +1,6 @@
 package com.chen.ellen.im.core;
 
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.im.core.exception.ServerConnectionException;
 import com.chen.ellen.im.core.handler.ChatReadListener;
 import com.chen.ellen.im.core.session.Session;

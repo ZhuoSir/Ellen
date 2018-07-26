@@ -1,8 +1,8 @@
 package com.chen.ellen.im.core.server.handler;
 
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.proxy.MessageProxy;
-import com.chen.ellen.im.core.service.ServerRespService;
+import com.chen.ellen.im.core.proxy.ImMessageProxy;
+import com.chen.ellen.im.core.service.ImServerResponse;
 import com.chen.ellen.im.core.session.ImConnect;
 import com.chen.ellen.im.core.session.Session;
 import com.chen.ellen.proto.C2SPacket;
@@ -16,17 +16,17 @@ public class ImAcceptorHandler extends ChannelInboundHandlerAdapter {
 
     private ImConnect imConnect;
 
-    private ServerRespService serverRespService;
+    private ImServerResponse imServerResponse;
 
-    private MessageProxy messageProxy;
+    private ImMessageProxy imMessageProxy;
 
     public ImAcceptorHandler() {
     }
 
-    public ImAcceptorHandler(ImConnect imConnect, ServerRespService serverRespService, MessageProxy messageProxy) {
+    public ImAcceptorHandler(ImConnect imConnect, ImServerResponse imServerResponse, ImMessageProxy imMessageProxy) {
         this.imConnect = imConnect;
-        this.serverRespService = serverRespService;
-        this.messageProxy = messageProxy;
+        this.imServerResponse = imServerResponse;
+        this.imMessageProxy = imMessageProxy;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class ImAcceptorHandler extends ChannelInboundHandlerAdapter {
             C2SPacket packet = (C2SPacket) msg;
             logger.info("服务端接收消息:" + packet.toString());
             Session session = imConnect.getSession(ctx);
-            IMessageWrapper wrapper = messageProxy.convert2MessageWrapper(session.getSessionId(), ctx, packet);
-            serverRespService.response(session, wrapper);
+            IMessageWrapper wrapper = imMessageProxy.convert2MessageWrapper(session.getSessionId(), ctx, packet);
+            imServerResponse.response(session, wrapper);
         }
     }
 
@@ -58,11 +58,11 @@ public class ImAcceptorHandler extends ChannelInboundHandlerAdapter {
         this.imConnect = imConnect;
     }
 
-    public void setServerRespService(ServerRespService serverRespService) {
-        this.serverRespService = serverRespService;
+    public void setImServerResponse(ImServerResponse imServerResponse) {
+        this.imServerResponse = imServerResponse;
     }
 
-    public void setMessageProxy(MessageProxy messageProxy) {
-        this.messageProxy = messageProxy;
+    public void setImMessageProxy(ImMessageProxy imMessageProxy) {
+        this.imMessageProxy = imMessageProxy;
     }
 }

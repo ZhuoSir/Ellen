@@ -1,4 +1,4 @@
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.im.core.AccountImClient;
 import com.chen.ellen.im.core.ImClient;
 import com.chen.ellen.im.core.ImClientMsgWrapper;

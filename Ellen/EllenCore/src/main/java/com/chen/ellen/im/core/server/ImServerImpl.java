@@ -1,10 +1,10 @@
 package com.chen.ellen.im.core.server;
 
-import com.chen.ellen.im.core.proxy.MessageProxy;
+import com.chen.ellen.im.core.proxy.ImMessageProxy;
 import com.chen.ellen.im.core.server.codec.MessageDecoder;
 import com.chen.ellen.im.core.server.codec.MessageEncoder;
 import com.chen.ellen.im.core.server.handler.ImAcceptorHandler;
-import com.chen.ellen.im.core.service.ServerRespService;
+import com.chen.ellen.im.core.service.ImServerResponse;
 import com.chen.ellen.im.core.session.ImConnect;
 import com.chen.ellen.proto.C2SPacket;
 import io.netty.bootstrap.ServerBootstrap;
@@ -37,9 +37,9 @@ public class ImServerImpl implements ImServer {
 
     private ImConnect imConnect;
 
-    private ServerRespService serverRespService;
+    private ImServerResponse imServerResponse;
 
-    private MessageProxy messageProxy;
+    private ImMessageProxy imMessageProxy;
 
     @Override
     public void init(Integer threadNum) {
@@ -62,7 +62,7 @@ public class ImServerImpl implements ImServer {
                 pipeline.addLast("messageDecoder", new MessageDecoder(C2SPacket.class));
                 pipeline.addLast("messageEncoder", new MessageEncoder());
                 pipeline.addLast(new IdleStateHandler(5, 5, 0));
-                pipeline.addLast("imAcceptorHandler", new ImAcceptorHandler(imConnect, serverRespService, messageProxy));
+                pipeline.addLast("imAcceptorHandler", new ImAcceptorHandler(imConnect, imServerResponse, imMessageProxy));
             }
         }).option(ChannelOption.SO_BACKLOG, 128)
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
@@ -103,11 +103,11 @@ public class ImServerImpl implements ImServer {
         this.imConnect = imConnect;
     }
 
-    public void setServerRespService(ServerRespService serverRespService) {
-        this.serverRespService = serverRespService;
+    public void setImServerResponse(ImServerResponse imServerResponse) {
+        this.imServerResponse = imServerResponse;
     }
 
-    public void setMessageProxy(MessageProxy messageProxy) {
-        this.messageProxy = messageProxy;
+    public void setImMessageProxy(ImMessageProxy imMessageProxy) {
+        this.imMessageProxy = imMessageProxy;
     }
 }

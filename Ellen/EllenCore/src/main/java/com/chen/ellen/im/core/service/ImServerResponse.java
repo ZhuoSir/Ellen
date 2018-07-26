@@ -6,7 +6,7 @@ import com.chen.ellen.im.core.session.Session;
 /**
  * Created by sunny-chen on 2018/1/22.
  */
-public interface ServerRespService {
+public interface ImServerResponse {
 
     void response(Session session, IMessageWrapper wrapper);
 

@@ -1,6 +1,6 @@
 package com.chen.ellen.service.impl;
 
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.im.core.message.IMessageWrapper;
 import com.chen.ellen.im.core.session.Session;
 import com.chen.ellen.service.AccountService;

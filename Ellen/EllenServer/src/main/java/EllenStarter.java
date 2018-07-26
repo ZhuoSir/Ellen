@@ -11,15 +11,6 @@ import java.util.concurrent.CountDownLatch;
  */
 public class EllenStarter {
 
-    @Value("Ellen.port")
-    private static int port;
-
-    @Value("Ellen.threadNum")
-    private static int threadNum;
-
-    @Value("Ellen.sync")
-    private static boolean sync;
-
     public static void main(String[] args) {
 
         try {

@@ -1,4 +1,4 @@
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.im.core.AccountImClient;
 import com.chen.ellen.im.core.ImClient;
 import com.chen.ellen.im.core.exception.ServerConnectionException;
@@ -35,7 +35,7 @@ public class Main2 {
 
             CMessageWrapper.Builder msgBuilder = new CMessageWrapper.Builder();
             msgBuilder.createDdate(new Date());
-            msgBuilder.receiver("4cdee942759d4135a83fa64fe9768542");
+            msgBuilder.receiver("fa924762c794438baf24c60e783dac80");
             msgBuilder.message("msg", "hello world");
 
             chatService.sendPersonalMessage(msgBuilder.build());

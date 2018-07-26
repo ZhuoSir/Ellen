@@ -1,4 +1,4 @@
-package com.chen.ellen.datao;
+package com.chen.ellen.po;
 
 import lombok.Data;
 

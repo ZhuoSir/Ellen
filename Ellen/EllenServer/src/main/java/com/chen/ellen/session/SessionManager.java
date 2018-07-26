@@ -1,6 +1,6 @@
 package com.chen.ellen.session;
 
-import com.chen.ellen.im.core.session.Group;
+import com.chen.ellen.im.core.session.ImGroup;
 import com.chen.ellen.im.core.session.Session;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -20,9 +20,9 @@ public interface SessionManager {
 
     void closeSession(Session session);
 
-    Group createGroup(Session creator);
+    ImGroup createGroup(Session creator);
 
-    Group getGroup(String groupId);
+    ImGroup getGroup(String groupId);
 
     void closeGroup(String groupId);
 

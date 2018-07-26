@@ -1,6 +1,6 @@
 package com.chen.ellen.proto;
 
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import lombok.Data;
 
 @Data

@@ -21,10 +21,10 @@ public class AccountImClient extends AbstractImClient {
                 channel.writeAndFlush(c2SPacket).addListener(new ChannelFutureListener() {
                     public void operationComplete(ChannelFuture future) throws Exception {
                         if (future.isSuccess()) {
-                            logger.info("signin successfully...");
+                            logger.info("登陆成功");
                             mSession.setImAccount(imAccount);
                         } else {
-                            logger.info("signin failed...");
+                            logger.info("登陆失败");
                         }
                     }
                 }).sync();

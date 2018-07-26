@@ -1,13 +1,13 @@
 package com.chen.ellen.service.impl;
 
-import com.chen.ellen.im.core.listener.SendMsgListener;
+import com.chen.ellen.im.core.listener.ImSendListener;
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.service.ServerRespService;
-import com.chen.ellen.im.core.session.Group;
+import com.chen.ellen.im.core.service.ImServerResponse;
+import com.chen.ellen.im.core.session.ImGroup;
 import com.chen.ellen.im.core.session.Session;
 import com.chen.ellen.proto.C2SPacket;
 import com.chen.ellen.proto.S2CPacket;
-import com.chen.ellen.service.MessageProxyImpl;
+import com.chen.ellen.service.ImMessageProxyImpl;
 import com.chen.ellen.service.handlers.CmdHandler;
 import com.chen.ellen.service.handlers.CmdHandlerManager;
 import com.chen.ellen.session.SessionManager;
@@ -26,9 +26,9 @@ import static com.chen.ellen.proto.ProtoTranslator.transMessage;
  * Created by sunny-chen on 2018/1/22.
  */
 @Component
-public class ServerRespServiceImpl implements ServerRespService {
+public class ServerResponseImpl implements ImServerResponse {
 
-    private Logger logger = Logger.getLogger(ServerRespServiceImpl.class);
+    private Logger logger = Logger.getLogger(ServerResponseImpl.class);
 
     @Autowired
     private SessionManager sessionManager;
@@ -37,7 +37,7 @@ public class ServerRespServiceImpl implements ServerRespService {
     private CmdHandlerManager cmdHandlerManager;
 
     @Autowired
-    private MessageProxyImpl messageProxy;
+    private ImMessageProxyImpl messageProxy;
 
     @Override
     public void response(Session session, IMessageWrapper wrapper) {
@@ -84,20 +84,20 @@ public class ServerRespServiceImpl implements ServerRespService {
         Session toSession   = sessionManager.getSession(wrapper.getReceiver());
         if (null != toSession && toSession.isConnect()) {
             S2CPacket s2CPacket = transMessage(c2SPacket);
-            toSession.writeAndFlush(s2CPacket).addListener(new SendMsgListener(session, c2SPacket));
+            toSession.writeAndFlush(s2CPacket).addListener(new ImSendListener(session, c2SPacket));
         }
     }
 
     @Override
     public void pushGroupMessage(Session session, IMessageWrapper wrapper) {
         String groupId = wrapper.getGroupId();
-        Group group = sessionManager.getGroup(groupId);
+        ImGroup imGroup = sessionManager.getGroup(groupId);
         C2SPacket c2SPacket = wrapper.getPacket();
-        if (null != group) {
+        if (null != imGroup) {
             S2CPacket s2CPacket = transMessage(c2SPacket);
-            List<ChannelFuture> futures = group.sendGroupMessage(s2CPacket);
+            List<ChannelFuture> futures = imGroup.sendGroupMessage(s2CPacket);
             if (null != futures && !futures.isEmpty()) {
-//                future.addListener(new SendMsgListener(session));
+//                future.addListener(new ImSendListener(session));
                 for (ChannelFuture future : futures) {
 
                 }

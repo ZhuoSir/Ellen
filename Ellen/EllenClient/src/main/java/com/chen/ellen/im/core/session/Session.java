@@ -1,6 +1,6 @@
 package com.chen.ellen.im.core.session;
 
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.proto.C2SPacket;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;

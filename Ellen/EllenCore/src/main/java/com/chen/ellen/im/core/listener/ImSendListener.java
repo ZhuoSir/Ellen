@@ -10,20 +10,20 @@ import io.netty.channel.ChannelFutureListener;
 /**
  * Created by sunny-chen on 2018/1/26.
  */
-public class SendMsgListener implements ChannelFutureListener {
+public class ImSendListener implements ChannelFutureListener {
 
     private Session sender;
 
-    public SendMsgListener(Session sender) {
+    public ImSendListener(Session sender) {
         this.sender = sender;
     }
 
     private C2SPacket c2SPacket;
 
-    public SendMsgListener() {
+    public ImSendListener() {
     }
 
-    public SendMsgListener(Session sender, C2SPacket c2SPacket) {
+    public ImSendListener(Session sender, C2SPacket c2SPacket) {
         this.sender = sender;
         this.c2SPacket = c2SPacket;
     }

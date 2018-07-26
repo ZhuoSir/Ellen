@@ -1,6 +1,6 @@
 package com.chen.ellen.im.core;
 
-import com.chen.ellen.datao.ImAccount;
+import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.im.core.codec.MessageDecoder;
 import com.chen.ellen.im.core.codec.MessageEncoder;
 import com.chen.ellen.im.core.exception.ServerConnectionException;

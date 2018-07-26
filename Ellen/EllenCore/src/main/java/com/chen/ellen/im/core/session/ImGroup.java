@@ -2,6 +2,7 @@ package com.chen.ellen.im.core.session;
 
 import com.chen.ellen.proto.S2CPacket;
 import io.netty.channel.ChannelFuture;
+import lombok.Data;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,7 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by sunny-chen on 2018/1/26.
  */
-public class Group {
+@Data
+public class ImGroup {
 
     private Session creator;
 
@@ -25,11 +27,11 @@ public class Group {
      * */
     ConcurrentHashMap<String, Session> sessionInGroup;
 
-    public Group() {
+    public ImGroup() {
         this.sessionInGroup = new ConcurrentHashMap<>();
     }
 
-    public Group(Session creator) {
+    public ImGroup(Session creator) {
         this.creator = creator;
         this.sessionInGroup = new ConcurrentHashMap<>();
         this.sessionInGroup.put(creator.getSessionId(), creator);
@@ -71,39 +73,39 @@ public class Group {
         return futureList;
     }
 
-    public void setCreator(Session creator) {
-        this.creator = creator;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public ConcurrentHashMap<String, Session> getSessionInGroup() {
-        return sessionInGroup;
-    }
-
-    public void setSessionInGroup(ConcurrentHashMap<String, Session> sessionInGroup) {
-        this.sessionInGroup = sessionInGroup;
-    }
+//    public void setCreator(Session creator) {
+//        this.creator = creator;
+//    }
+//
+//    public String getGroupId() {
+//        return groupId;
+//    }
+//
+//    public void setGroupId(String groupId) {
+//        this.groupId = groupId;
+//    }
+//
+//    public String getGroupName() {
+//        return groupName;
+//    }
+//
+//    public void setGroupName(String groupName) {
+//        this.groupName = groupName;
+//    }
+//
+//    public Date getCreateTime() {
+//        return createTime;
+//    }
+//
+//    public void setCreateTime(Date createTime) {
+//        this.createTime = createTime;
+//    }
+//
+//    public ConcurrentHashMap<String, Session> getSessionInGroup() {
+//        return sessionInGroup;
+//    }
+//
+//    public void setSessionInGroup(ConcurrentHashMap<String, Session> sessionInGroup) {
+//        this.sessionInGroup = sessionInGroup;
+//    }
 }

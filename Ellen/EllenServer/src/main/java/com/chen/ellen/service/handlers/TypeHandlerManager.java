@@ -5,7 +5,7 @@ import com.chen.ellen.im.core.session.Session;
 import com.chen.ellen.proto.IMHeader;
 import com.chen.ellen.service.impl.AccountServiceImpl;
 import com.chen.ellen.service.impl.FriendsServiceImpl;
-import com.chen.ellen.service.impl.ServerRespServiceImpl;
+import com.chen.ellen.service.impl.ServerResponseImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class TypeHandlerManager {
     private AccountServiceImpl accountService;
 
     @Autowired
-    private ServerRespServiceImpl serverRespService;
+    private ServerResponseImpl serverRespService;
 
     private final Map<Integer, TypeHandler> typeHandlerMap = new ConcurrentHashMap<Integer, TypeHandler>() {
         {

@@ -1,6 +1,6 @@
 package com.chen.ellen.session;
 
-import com.chen.ellen.im.core.session.Group;
+import com.chen.ellen.im.core.session.ImGroup;
 import com.chen.ellen.im.core.session.Session;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
@@ -16,13 +16,13 @@ public class SessionManagerImpl implements SessionManager {
 
     private static Map<String, Session> sessionMap = new ConcurrentHashMap<>();
 
-    private static Map<String, Group> groupMap = new ConcurrentHashMap<>();
+    private static Map<String, ImGroup> groupMap = new ConcurrentHashMap<>();
 
     @Override
     public Session createSession(ChannelHandlerContext ctx) {
         Session session = new Session();
         session.setStatus(Session.StatusCode.ONLINE);
-        session.setmChannel(ctx.channel());
+        session.setMChannel(ctx.channel());
         session.setSessionId(generateSessionId());
         sessionMap.putIfAbsent(session.getSessionId(), session);
         return session;
@@ -75,22 +75,22 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public Group createGroup(Session creator) {
-        Group group = new Group(creator);
-        group.setCreateTime(new Date());
-        group.setGroupName(creator.getAccountId() + "于" + group.getCreateTime() + "发起的聊天组");
-        group.setGroupId(generateSessionId());
+    public ImGroup createGroup(Session creator) {
+        ImGroup imGroup = new ImGroup(creator);
+        imGroup.setCreateTime(new Date());
+        imGroup.setGroupName(creator.getAccountId() + "于" + imGroup.getCreateTime() + "发起的聊天组");
+        imGroup.setGroupId(generateSessionId());
 
-        if (groupMap.putIfAbsent(group.getGroupId(), group) == null) {
-            logger.info("创建Group 成功 :" + group);
+        if (groupMap.putIfAbsent(imGroup.getGroupId(), imGroup) == null) {
+            logger.info("创建Group 成功 :" + imGroup);
         }
 
-        return group;
+        return imGroup;
     }
 
 
     @Override
-    public Group getGroup(String groupId) {
+    public ImGroup getGroup(String groupId) {
         return groupMap.get(groupId);
     }
 
