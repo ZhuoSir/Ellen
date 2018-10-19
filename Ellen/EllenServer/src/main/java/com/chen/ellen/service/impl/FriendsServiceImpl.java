@@ -1,7 +1,7 @@
 package com.chen.ellen.service.impl;
 
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import com.chen.ellen.service.FriendsService;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class FriendsServiceImpl implements FriendsService {
 
     @Override
-    public void addFriend(Session session, IMessageWrapper wrapper) {
+    public void addFriend(ImSession imSession, IMessageWrapper wrapper) {
 
     }
 }

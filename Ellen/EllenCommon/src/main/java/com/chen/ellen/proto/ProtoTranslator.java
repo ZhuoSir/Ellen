@@ -42,4 +42,12 @@ public class ProtoTranslator {
         s2CPacket.setS2CHead(s2CHead);
         return s2CPacket;
     }
+
+    public static S2CPacket transCancelResp(C2SPacket packet) {
+        S2CPacket s2CPacket = transMessage(packet);
+        S2CHead s2CHead = s2CPacket.getS2CHead();
+        s2CHead.setCode(IMHeader.CODE.REQUESTCACENL);
+        s2CPacket.setS2CHead(s2CHead);
+        return s2CPacket;
+    }
 }

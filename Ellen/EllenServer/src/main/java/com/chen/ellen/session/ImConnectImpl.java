@@ -2,7 +2,7 @@ package com.chen.ellen.session;
 
 import com.chen.ellen.im.constant.Constant;
 import com.chen.ellen.im.core.session.ImConnect;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,10 @@ public class ImConnectImpl implements ImConnect {
     @Override
     public void connect(ChannelHandlerContext ctx) {
         logger.info("有新的连接，创建会话Session");
-        Session session = sessionManager.createSession(ctx);
-        logger.info("创建新的会话成功Session" + session);
+        ImSession imSession = sessionManager.createSession(ctx);
+        logger.info("创建新的会话成功Session" + imSession);
 
-        ctx.channel().attr(Constant.SessionConfig.SERVER_SESSION_ID).set(session.getSessionId());
+        ctx.channel().attr(Constant.SessionConfig.SERVER_SESSION_ID).set(imSession.getSessionId());
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ImConnectImpl implements ImConnect {
     }
 
     @Override
-    public Session getSession(ChannelHandlerContext ctx) {
+    public ImSession getSession(ChannelHandlerContext ctx) {
         return sessionManager.getSession(getSessionId(ctx));
     }
 }

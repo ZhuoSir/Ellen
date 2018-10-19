@@ -11,43 +11,29 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by sunny-chen on 2018/1/26.
  */
 @Data
-public class ImGroup {
-
-    private Session creator;
+public class ImGroup extends ImChatRoom {
 
     private String groupId;
 
     private String groupName;
 
-    private Date createTime;
-
-    /**
-     * 会话组里的Session
-     *
-     * */
-    ConcurrentHashMap<String, Session> sessionInGroup;
-
     public ImGroup() {
         this.sessionInGroup = new ConcurrentHashMap<>();
     }
 
-    public ImGroup(Session creator) {
-        this.creator = creator;
+    public ImGroup(ImSession creator) {
+        super.creator = creator;
         this.sessionInGroup = new ConcurrentHashMap<>();
         this.sessionInGroup.put(creator.getSessionId(), creator);
     }
 
-    public Session getCreator() {
-        return creator;
-    }
-
-    public void addSession(Session session) {
-        if (null != session && session.isConnect()) {
-            sessionInGroup.putIfAbsent(session.getSessionId(), session);
+    public void addSession(ImSession imSession) {
+        if (null != imSession && imSession.isConnect()) {
+            sessionInGroup.putIfAbsent(imSession.getSessionId(), imSession);
         }
     }
 
-    public Session getSession(String sessionId) {
+    public ImSession getSession(String sessionId) {
         return sessionInGroup.get(sessionId);
     }
 
@@ -64,8 +50,8 @@ public class ImGroup {
         while (iterator.hasNext()) {
             String sessionId = iterator.next();
             if (!creator.getSessionId().equals(sessionId)) {
-                Session session = getSession(sessionId);
-                ChannelFuture future = session.writeAndFlush(packet);
+                ImSession imSession = getSession(sessionId);
+                ChannelFuture future = imSession.writeAndFlush(packet);
                 futureList.add(future);
             }
         }
@@ -73,7 +59,7 @@ public class ImGroup {
         return futureList;
     }
 
-//    public void setCreator(Session creator) {
+//    public void setCreator(ImSession creator) {
 //        this.creator = creator;
 //    }
 //
@@ -101,11 +87,11 @@ public class ImGroup {
 //        this.createTime = createTime;
 //    }
 //
-//    public ConcurrentHashMap<String, Session> getSessionInGroup() {
+//    public ConcurrentHashMap<String, ImSession> getSessionInGroup() {
 //        return sessionInGroup;
 //    }
 //
-//    public void setSessionInGroup(ConcurrentHashMap<String, Session> sessionInGroup) {
+//    public void setSessionInGroup(ConcurrentHashMap<String, ImSession> sessionInGroup) {
 //        this.sessionInGroup = sessionInGroup;
 //    }
 }

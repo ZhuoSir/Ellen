@@ -1,26 +1,26 @@
 package com.chen.ellen.session;
 
 import com.chen.ellen.im.core.session.ImGroup;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import io.netty.channel.ChannelHandlerContext;
 
 public interface SessionManager {
 
-    Session createSession(ChannelHandlerContext ctx);
+    ImSession createSession(ChannelHandlerContext ctx);
 
-    Session getSession(String sessionId);
+    ImSession getSession(String sessionId);
 
-    Session getSessionByAccountId(String accountId);
+    ImSession getSessionByAccountId(String accountId);
 
-    void updateSession(Session session);
+    void updateSession(ImSession imSession);
 
     void removeSession(String sessionId);
 
     void closeSession(String sessionId);
 
-    void closeSession(Session session);
+    void closeSession(ImSession imSession);
 
-    ImGroup createGroup(Session creator);
+    ImGroup createGroup(ImSession creator);
 
     ImGroup getGroup(String groupId);
 

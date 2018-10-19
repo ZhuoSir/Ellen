@@ -2,7 +2,7 @@ package com.chen.ellen.service.handlers;
 
 import com.chen.ellen.im.core.message.IMessageWrapper;
 import com.chen.ellen.im.core.service.ImServerResponse;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import com.chen.ellen.proto.IMHeader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,10 +38,10 @@ public class CmdHandlerManager {
     private class ConnectCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
             TypeHandler typeHandler = typeHandlerManager.getTypeHandler(wrapper.getType());
             if (null != typeHandler) {
-                typeHandler.handle(session, wrapper);
+                typeHandler.handle(imSession, wrapper);
             }
         }
     }
@@ -49,34 +49,34 @@ public class CmdHandlerManager {
     private class PersonalMsgCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            imServerResponse.pushMessage(session, wrapper);
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            imServerResponse.pushMessage(imSession, wrapper);
         }
     }
 
     private class OnlineCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            session.status();
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            imSession.status();
         }
     }
 
     private class OffLineCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            session.status();
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            imSession.status();
         }
     }
 
     private class FriendCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
             TypeHandler typeHandler = typeHandlerManager.getTypeHandler(wrapper.getType());
             if (null != typeHandler) {
-                typeHandler.handle(session, wrapper);
+                typeHandler.handle(imSession, wrapper);
             }
         }
     }
@@ -84,10 +84,10 @@ public class CmdHandlerManager {
     private class GroupCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
             TypeHandler typeHandler = typeHandlerManager.getTypeHandler(wrapper.getType());
             if (null != typeHandler) {
-                typeHandler.handle(session, wrapper);
+                typeHandler.handle(imSession, wrapper);
             }
         }
     }
@@ -95,8 +95,8 @@ public class CmdHandlerManager {
     private class ExitCmdHandler implements CmdHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            session.close();
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            imSession.close();
         }
     }
 }

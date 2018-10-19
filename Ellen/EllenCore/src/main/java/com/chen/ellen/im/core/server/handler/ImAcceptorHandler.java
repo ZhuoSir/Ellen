@@ -4,7 +4,7 @@ import com.chen.ellen.im.core.message.IMessageWrapper;
 import com.chen.ellen.im.core.proxy.ImMessageProxy;
 import com.chen.ellen.im.core.service.ImServerResponse;
 import com.chen.ellen.im.core.session.ImConnect;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import com.chen.ellen.proto.C2SPacket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -42,9 +42,9 @@ public class ImAcceptorHandler extends ChannelInboundHandlerAdapter {
         if (msg instanceof C2SPacket) {
             C2SPacket packet = (C2SPacket) msg;
             logger.info("服务端接收消息:" + packet.toString());
-            Session session = imConnect.getSession(ctx);
-            IMessageWrapper wrapper = imMessageProxy.convert2MessageWrapper(session.getSessionId(), ctx, packet);
-            imServerResponse.response(session, wrapper);
+            ImSession imSession = imConnect.getSession(ctx);
+            IMessageWrapper wrapper = imMessageProxy.convert2MessageWrapper(imSession.getSessionId(), ctx, packet);
+            imServerResponse.response(imSession, wrapper);
         }
     }
 

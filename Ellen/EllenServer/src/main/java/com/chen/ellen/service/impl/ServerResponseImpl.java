@@ -4,7 +4,7 @@ import com.chen.ellen.im.core.listener.ImSendListener;
 import com.chen.ellen.im.core.message.IMessageWrapper;
 import com.chen.ellen.im.core.service.ImServerResponse;
 import com.chen.ellen.im.core.session.ImGroup;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import com.chen.ellen.proto.C2SPacket;
 import com.chen.ellen.proto.S2CPacket;
 import com.chen.ellen.service.ImMessageProxyImpl;
@@ -40,68 +40,68 @@ public class ServerResponseImpl implements ImServerResponse {
     private ImMessageProxyImpl messageProxy;
 
     @Override
-    public void response(Session session, IMessageWrapper wrapper) {
-        if (null == session || null == wrapper) return;
+    public void response(ImSession imSession, IMessageWrapper wrapper) {
+        if (null == imSession || null == wrapper) return;
 
         try {
             CmdHandler cmdHandler = cmdHandlerManager.getCmdHandler(wrapper.getCmd());
             if (null != cmdHandler) {
-                cmdHandler.handle(session, wrapper);
+                cmdHandler.handle(imSession, wrapper);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e);
-            serverBusy(session);
+            serverBusy(imSession);
         }
 
     }
 
     @Override
-    public void requestSuccess(Session session) {
+    public void requestSuccess(ImSession imSession) {
         Object resp = messageProxy.genRequestSuccResp();
-        session.writeAndFlush(resp);
+        imSession.writeAndFlush(resp);
     }
 
     @Override
-    public void requestFail(Session session) {
-
-    }
-
-    @Override
-    public void serverBusy(Session session) {
+    public void requestFail(ImSession imSession) {
 
     }
 
     @Override
-    public void error(Session session) {
+    public void serverBusy(ImSession imSession) {
 
     }
 
     @Override
-    public void pushMessage(Session session, IMessageWrapper wrapper) {
+    public void error(ImSession imSession) {
+
+    }
+
+    @Override
+    public void pushMessage(ImSession imSession, IMessageWrapper wrapper) {
         C2SPacket c2SPacket = wrapper.getPacket();
-        Session toSession   = sessionManager.getSession(wrapper.getReceiver());
-        if (null != toSession && toSession.isConnect()) {
+        ImSession toImSession = sessionManager.getSession(wrapper.getReceiver());
+        if (null != toImSession && toImSession.isConnect()) {
             S2CPacket s2CPacket = transMessage(c2SPacket);
-            toSession.writeAndFlush(s2CPacket).addListener(new ImSendListener(session, c2SPacket));
+            toImSession.writeAndFlush(s2CPacket).addListener(new ImSendListener(imSession, toImSession, c2SPacket));
         }
     }
 
     @Override
-    public void pushGroupMessage(Session session, IMessageWrapper wrapper) {
+    public void pushGroupMessage(ImSession imSession, IMessageWrapper wrapper) {
         String groupId = wrapper.getGroupId();
         ImGroup imGroup = sessionManager.getGroup(groupId);
         C2SPacket c2SPacket = wrapper.getPacket();
         if (null != imGroup) {
             S2CPacket s2CPacket = transMessage(c2SPacket);
             List<ChannelFuture> futures = imGroup.sendGroupMessage(s2CPacket);
-            if (null != futures && !futures.isEmpty()) {
-//                future.addListener(new ImSendListener(session));
-                for (ChannelFuture future : futures) {
-
-                }
-            }
+//            if (null != futures && !futures.isEmpty()) {
+////                future.addListener(new ImSendListener(imSession));
+//                for (ChannelFuture future : futures) {
+//
+//                }
+//            }
         }
     }
 }

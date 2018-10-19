@@ -2,7 +2,7 @@ package com.chen.ellen.service.impl;
 
 import com.chen.ellen.po.ImAccount;
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import com.chen.ellen.service.AccountService;
 import com.chen.ellen.session.SessionManagerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class AccountServiceImpl implements AccountService {
     private SessionManagerImpl sessionManager;
 
     @Override
-    public ImAccount initAccountAfterConnect(Session session,
+    public ImAccount initAccountAfterConnect(ImSession imSession,
                                              IMessageWrapper wrapper) {
         ImAccount imAccount = wrapper.getAccount();
-        session.setAccountId(imAccount.getAccountId());
-        sessionManager.updateSession(session);
+        imSession.setAccountId(imAccount.getAccountId());
+        sessionManager.updateSession(imSession);
         return imAccount;
     }
 

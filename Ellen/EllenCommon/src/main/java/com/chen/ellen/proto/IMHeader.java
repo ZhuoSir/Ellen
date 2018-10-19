@@ -89,5 +89,6 @@ public interface IMHeader {
         int REQUESTSUCCESS = 0x10;
         int REQUESTFAILURE = 0x11;
         int REQUESTERROR   = 0x20;
+        int REQUESTCACENL   = 0x30;
     }
 }

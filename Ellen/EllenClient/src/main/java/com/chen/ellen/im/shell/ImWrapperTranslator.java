@@ -13,7 +13,7 @@ public class ImWrapperTranslator {
         C2SPacket.Builder builder = new C2SPacket.Builder(IMHeader.SIGN.PUSH, TYPE, CMD);
 
         builder.account(session.getImAccount());
-//        builder.Sender(session.)
+//        builder.Sender(imSession.)
         builder.body(wrapper.getTitle(), wrapper.getContent(), 0);
         if (wrapper.isGroup()) {
             builder.groupId(wrapper.getReceiver());

@@ -1,7 +1,7 @@
 package com.chen.ellen.session;
 
 import com.chen.ellen.im.core.session.ImGroup;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -14,35 +14,35 @@ public class SessionManagerImpl implements SessionManager {
 
     private Logger logger = Logger.getLogger(SessionManagerImpl.class);
 
-    private static Map<String, Session> sessionMap = new ConcurrentHashMap<>();
+    private static Map<String, ImSession> sessionMap = new ConcurrentHashMap<>();
 
     private static Map<String, ImGroup> groupMap = new ConcurrentHashMap<>();
 
     @Override
-    public Session createSession(ChannelHandlerContext ctx) {
-        Session session = new Session();
-        session.setStatus(Session.StatusCode.ONLINE);
-        session.setMChannel(ctx.channel());
-        session.setSessionId(generateSessionId());
-        sessionMap.putIfAbsent(session.getSessionId(), session);
-        return session;
+    public ImSession createSession(ChannelHandlerContext ctx) {
+        ImSession imSession = new ImSession();
+        imSession.setStatus(ImSession.StatusCode.ONLINE);
+        imSession.setMChannel(ctx.channel());
+        imSession.setSessionId(generateSessionId());
+        sessionMap.putIfAbsent(imSession.getSessionId(), imSession);
+        return imSession;
     }
 
     @Override
-    public Session getSession(String sessionId) {
+    public ImSession getSession(String sessionId) {
         if (null == sessionId) return null;
         return sessionMap.get(sessionId);
     }
 
     @Override
-    public Session getSessionByAccountId(String accountId) {
+    public ImSession getSessionByAccountId(String accountId) {
         Set<String> keys = sessionMap.keySet();
         Iterator<String> iterator = keys.iterator();
         while (iterator.hasNext()) {
             String key = iterator.next();
-            Session session = sessionMap.get(key);
-            if (accountId.equals(session.getAccountId())) {
-                return session;
+            ImSession imSession = sessionMap.get(key);
+            if (accountId.equals(imSession.getAccountId())) {
+                return imSession;
             }
         }
 
@@ -50,9 +50,9 @@ public class SessionManagerImpl implements SessionManager {
     }
 
     @Override
-    public void updateSession(Session session) {
-        if (null != session) {
-            sessionMap.put(session.getSessionId(), session);
+    public void updateSession(ImSession imSession) {
+        if (null != imSession) {
+            sessionMap.put(imSession.getSessionId(), imSession);
         }
     }
 
@@ -63,19 +63,19 @@ public class SessionManagerImpl implements SessionManager {
 
     @Override
     public void closeSession(String sessionId) {
-        Session session = getSession(sessionId);
-        closeSession(session);
+        ImSession imSession = getSession(sessionId);
+        closeSession(imSession);
     }
 
-    public void closeSession(Session session) {
-        if (null != session && session.isConnect()) {
-            session.close();
-            removeSession(session.getSessionId());
+    public void closeSession(ImSession imSession) {
+        if (null != imSession && imSession.isConnect()) {
+            imSession.close();
+            removeSession(imSession.getSessionId());
         }
     }
 
     @Override
-    public ImGroup createGroup(Session creator) {
+    public ImGroup createGroup(ImSession creator) {
         ImGroup imGroup = new ImGroup(creator);
         imGroup.setCreateTime(new Date());
         imGroup.setGroupName(creator.getAccountId() + "于" + imGroup.getCreateTime() + "发起的聊天组");

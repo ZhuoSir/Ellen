@@ -26,16 +26,16 @@ public class Main2 {
             imClient.init(5);
             imClient.connect("127.0.0.1", 8888, true);
 
-//            Session session = imClient.getSession();
-//            session.send(c2SPacket);
-//            System.out.println(session);
+//            Session imSession = imClient.getSession();
+//            imSession.send(c2SPacket);
+//            System.out.println(imSession);
 
             ChatServiceImpl chatService = new ChatServiceImpl();
             chatService.setImClient(imClient);
 
             CMessageWrapper.Builder msgBuilder = new CMessageWrapper.Builder();
             msgBuilder.createDdate(new Date());
-            msgBuilder.receiver("fa924762c794438baf24c60e783dac80");
+            msgBuilder.receiver("19b953480f9542538adcf1ce647ad8df");
             msgBuilder.message("msg", "hello world");
 
             chatService.sendPersonalMessage(msgBuilder.build());

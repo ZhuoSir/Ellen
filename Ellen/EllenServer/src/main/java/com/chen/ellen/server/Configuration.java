@@ -1,5 +1,7 @@
 package com.chen.ellen.server;
 
+import com.chen.ellen.im.core.process.DaemonTaskManager;
+import com.chen.ellen.im.core.process.PushResponseTask;
 import com.chen.ellen.im.core.proxy.ImMessageProxy;
 import com.chen.ellen.im.core.server.ImServer;
 import com.chen.ellen.im.core.server.ImServerImpl;
@@ -15,6 +17,8 @@ import org.springframework.context.annotation.Bean;
 public class Configuration {
 
     private ImServerImpl imServer = null;
+
+    private DaemonTaskManager daemonTaskManager = null;
 
     @Autowired
     private ImConnect imConnect;
@@ -37,4 +41,12 @@ public class Configuration {
         return imServer;
     }
 
+    @Bean("daemonTaskManager")
+    public DaemonTaskManager daemonTaskManager() {
+        if (daemonTaskManager == null) {
+            daemonTaskManager = new DaemonTaskManager();
+            daemonTaskManager.addTask(new PushResponseTask());
+        }
+        return daemonTaskManager;
+    }
 }

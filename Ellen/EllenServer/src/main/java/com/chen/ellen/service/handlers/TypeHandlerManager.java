@@ -1,7 +1,7 @@
 package com.chen.ellen.service.handlers;
 
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 import com.chen.ellen.proto.IMHeader;
 import com.chen.ellen.service.impl.AccountServiceImpl;
 import com.chen.ellen.service.impl.FriendsServiceImpl;
@@ -41,15 +41,15 @@ public class TypeHandlerManager {
     private class SignInTypeHandler implements TypeHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            accountService.initAccountAfterConnect(session, wrapper);
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            accountService.initAccountAfterConnect(imSession, wrapper);
         }
     }
 
     private class ExitTypeHandler implements TypeHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
 
         }
     }
@@ -57,15 +57,15 @@ public class TypeHandlerManager {
     private class AddFriendTypeHandler implements TypeHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            friendsService.addFriend(session, wrapper);
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            friendsService.addFriend(imSession, wrapper);
         }
     }
 
     private class RmvFriendTypeHandler implements TypeHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
 
         }
     }
@@ -73,8 +73,8 @@ public class TypeHandlerManager {
     private class GroupMessageTypeHandler implements TypeHandler {
 
         @Override
-        public void handle(Session session, IMessageWrapper wrapper) {
-            serverRespService.pushGroupMessage(session, wrapper);
+        public void handle(ImSession imSession, IMessageWrapper wrapper) {
+            serverRespService.pushGroupMessage(imSession, wrapper);
         }
     }
 }

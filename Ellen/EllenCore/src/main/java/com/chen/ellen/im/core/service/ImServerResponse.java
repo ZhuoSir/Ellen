@@ -1,24 +1,24 @@
 package com.chen.ellen.im.core.service;
 
 import com.chen.ellen.im.core.message.IMessageWrapper;
-import com.chen.ellen.im.core.session.Session;
+import com.chen.ellen.im.core.session.ImSession;
 
 /**
  * Created by sunny-chen on 2018/1/22.
  */
 public interface ImServerResponse {
 
-    void response(Session session, IMessageWrapper wrapper);
+    void response(ImSession imSession, IMessageWrapper wrapper);
 
-    void requestSuccess(Session session);
+    void requestSuccess(ImSession imSession);
 
-    void requestFail(Session session);
+    void requestFail(ImSession imSession);
 
-    void serverBusy(Session session);
+    void serverBusy(ImSession imSession);
 
-    void error(Session session);
+    void error(ImSession imSession);
 
-    void pushMessage(Session session, IMessageWrapper wrapper);
+    void pushMessage(ImSession imSession, IMessageWrapper wrapper);
 
-    void pushGroupMessage(Session session, IMessageWrapper wrapper);
+    void pushGroupMessage(ImSession imSession, IMessageWrapper wrapper);
 }

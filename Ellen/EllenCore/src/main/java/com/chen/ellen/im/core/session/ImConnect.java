@@ -10,6 +10,6 @@ public interface ImConnect {
 
     String getSessionId(ChannelHandlerContext ctx);
 
-    Session getSession(ChannelHandlerContext ctx);
+    ImSession getSession(ChannelHandlerContext ctx);
 
 }

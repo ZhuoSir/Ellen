@@ -6,6 +6,8 @@ import com.chen.ellen.im.core.exception.ServerConnectionException;
 import com.chen.ellen.im.core.handler.ChatReadListener;
 import com.chen.ellen.im.shell.ChatService;
 import com.chen.ellen.im.shell.ChatServiceImpl;
+import com.chen.jeneral.utils.DateUtils;
+import com.chen.jeneral.utils.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
@@ -30,15 +32,16 @@ public class Main {
             imClient.setImAccount(imAccount);
             imClient.setChatReadListener(new ChatReadListener() {
                 public void read(ImClientMsgWrapper wrapper) {
-                    logger.info(wrapper.getTimeStamp() + ": " + wrapper.getContent());
+                    String timeStamp = wrapper.getTimeStamp() != null ? wrapper.getTimeStamp() : DateUtils.currentTime(DateUtils.DEFAULT_PATTERN);
+                    logger.info(timeStamp + ": " + wrapper.getContent());
                 }
             });
             imClient.init(5);
             imClient.connect("127.0.0.1", 8888, true);
 
-//            Session session = imClient.getSession();
-//            session.send(c2SPacket);
-//            System.out.println(session);
+//            Session imSession = imClient.getSession();
+//            imSession.send(c2SPacket);
+//            System.out.println(imSession);
 
             ChatService chatService = new ChatServiceImpl(imClient);
 //            chatService.setChatReadListener(new ChatReadListener() {
